@@ -1,0 +1,6 @@
+<cn-conversation-item
+  *ngFor="let user of users; trackBy: trackByUid"
+  class="user"
+  [user]="user"
+  (createDialog)="onCreateDialog($event)"
+/>

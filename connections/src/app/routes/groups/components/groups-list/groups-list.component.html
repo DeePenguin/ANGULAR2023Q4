@@ -1,0 +1,6 @@
+<cn-group-item
+  *ngFor="let group of groups; trackBy: trackById"
+  class="group"
+  [group]="group"
+  (remove)="onRemove($event)"
+/>

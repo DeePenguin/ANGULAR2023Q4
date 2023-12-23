@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .label {
+    cursor: pointer;
+  }
+}

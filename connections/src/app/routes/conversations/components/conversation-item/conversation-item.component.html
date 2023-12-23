@@ -1,0 +1,7 @@
+<a *ngIf="user.dialog; else noDialog" class="link" tuiLink [routerLink]="['/conversations', user.dialog]">{{
+  user.name
+}}</a>
+
+<ng-template #noDialog>
+  <button tuiLink type="button" class="no-link" (click)="onClick()">{{ user.name }}</button>
+</ng-template>

@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--tui-base-04);
+  border-radius: var(--tui-radius-xs);
+}
+
+.link,
+.no-link {
+  display: block;
+  flex-grow: 1;
+
+  padding: 0.5em;
+
+  word-break: break-word;
+
+  border-radius: inherit;
+}
+
+.link {
+  background-color: var(--scrollable-background);
+}

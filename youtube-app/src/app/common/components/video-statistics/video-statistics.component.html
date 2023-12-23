@@ -1,0 +1,6 @@
+<ul class="statistics-list">
+  <li *ngFor="let item of items; trackBy: trackByKey" class="statistics-item">
+    <mat-icon inline="true">{{ item.icon }}</mat-icon>
+    {{ statistics[item.key] }}
+  </li>
+</ul>

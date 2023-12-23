@@ -1,0 +1,10 @@
+<ng-container *ngrxLet="isDark$ as isDark">
+  <button
+    tuiIconButton
+    appearance="flat"
+    size="m"
+    title="Change theme"
+    [icon]="isDark ? 'tuiIconSun' : 'tuiIconMoon'"
+    (click)="toggleTheme()"
+  ></button>
+</ng-container>

@@ -1,0 +1,8 @@
+<form class="form" tuiGroup [collapsed]="true" [formGroup]="form" (ngSubmit)="sendMessage()">
+  <tui-input class="input" formControlName="message" tuiTextfieldSize="m" [tuiTextfieldLabelOutside]="true">
+    <input tuiTextfield placeholder="Type your message" type="text" />
+  </tui-input>
+  <button class="send" tuiButton size="m" appearance="primary" type="submit" [disabled]="isSendButtonDisabled">
+    Send
+  </button>
+</form>

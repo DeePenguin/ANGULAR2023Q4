@@ -1,0 +1,71 @@
+<ng-container *ngrxLet="isAuthorized$ as isAuthorized">
+  <ng-container *ngIf="isAuthorized; then user; else guest" />
+</ng-container>
+
+<ng-template #user>
+  <div class="user">
+    <button
+      tuiIconButton
+      size="m"
+      appearance="secondary"
+      icon="tuiIconLogOut"
+      class="tui-space_right-1"
+      title="Sign out"
+      [showLoader]="!!(isLoading$ | async)"
+      (click)="signOut()"
+    ></button>
+    <button
+      tuiIconButton
+      size="m"
+      appearance="secondary"
+      icon="tuiIconUser"
+      class="tui-space_right-1"
+      title="Profile"
+      [routerLink]="['/', 'profile']"
+    ></button>
+  </div>
+</ng-template>
+<ng-template #guest>
+  <tui-hosted-dropdown #dropdown [content]="authOptions" [(open)]="isAuthDropdownOpen">
+    <button
+      tuiIconButton
+      size="m"
+      appearance="secondary"
+      icon="tuiIconLogIn"
+      type="button"
+      title="Log in"
+      class="tui-space_right-1"
+    ></button>
+  </tui-hosted-dropdown>
+
+  <ng-template #authOptions>
+    <tui-data-list tuiDataListDropdownManager>
+      <button tuiOption size="m">
+        <button
+          tuiButton
+          appearance="primary"
+          icon="tuiIconUserCheck"
+          size="m"
+          title="Sign in"
+          [routerLink]="['/auth/sign-in']"
+          (click)="selectAuthOption()"
+        >
+          Sign in
+        </button>
+      </button>
+      <button tuiOption size="m">
+        <button
+          tuiButton
+          appearance="secondary"
+          icon="tuiIconUserPlus"
+          size="m"
+          title="Sign up"
+          [routerLink]="['/auth/sign-up']"
+          (click)="selectAuthOption()"
+        >
+          Sign up
+        </button>
+      </button>
+    </tui-data-list>
+  </ng-template>
+</ng-template>

@@ -1,0 +1,73 @@
+<ng-container *ngrxLet="{ profile: profile$, isLoading: isLoading$, error: error$ } as state">
+  <ng-container *ngIf="state.error; then error; else profileInfo" />
+
+  <ng-template #profileInfo>
+    <tui-loader [overlay]="true" [showLoader]="state.isLoading">
+      <ng-container *ngIf="state.profile as profile">
+        <table class="tui-table table">
+          <tbody>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <th class="tui-table__th tui-table__th_font-size_l tui-table__th_first">Name</th>
+              <td class="tui-table__td tui-table__td_last">
+                <ng-container
+                  *ngIf="!isEditing; else nameEdit"
+                  [ngTemplateOutlet]="nameStatic"
+                  [ngTemplateOutletContext]="{ profile }"
+                />
+              </td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <th class="tui-table__th tui-table__th_font-size_l tui-table__th_first">Email</th>
+              <td class="tui-table__td tui-table__td_last">{{ profile.email }}</td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <th class="tui-table__th tui-table__th_font-size_l tui-table__th_first">Uid</th>
+              <td class="tui-table__td tui-table__td_last">{{ profile.uid }}</td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <th class="tui-table__th tui-table__th_font-size_l tui-table__th_first">Created</th>
+              <td class="tui-table__td tui-table__td_last">{{ profile.createdAt | date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </tui-loader>
+  </ng-template>
+
+  <ng-template #nameStatic let-profile="profile">
+    <div class="name-static">
+      <span>{{ profile.name }}</span>
+      <button tuiButton size="m" appearance="flat" (click)="edit(profile.name)">Edit</button>
+    </div>
+  </ng-template>
+
+  <ng-template #nameEdit>
+    <form class="name-edit" [formGroup]="form" (ngSubmit)="changeName()">
+      <div class="input">
+        <tui-input
+          formControlName="name"
+          tuiTextfieldSize="m"
+          tuiHintContent="Name can contain only letters and spaces"
+        >
+          Name
+          <input tuiTextfield type="text" autocomplete="name" />
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+      </div>
+      <div class="buttons">
+        <button tuiButton size="m" type="button" appearance="flat" (click)="cancelEdit()">Cancel</button>
+        <button tuiButton size="m" appearance="primary" type="submit" [disabled]="form.pristine || form.invalid">
+          Save
+        </button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #error>
+    <tui-block-status>
+      <img alt="something wrong" src="assets/images/cancel.svg" tuiSlot="top" />
+      Some error occurred. Please try again later.
+    </tui-block-status>
+  </ng-template>
+</ng-container>

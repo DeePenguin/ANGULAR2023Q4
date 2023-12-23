@@ -1,0 +1,11 @@
+<label class="label" for="filter-input">Filter by words: </label>
+<mat-form-field class="filter" appearance="outline" subscriptSizing="dynamic">
+  <input
+    id="filter-input"
+    class="filter__input"
+    matInput
+    placeholder="Type for filter"
+    type="text"
+    [formControl]="filter"
+  />
+</mat-form-field>

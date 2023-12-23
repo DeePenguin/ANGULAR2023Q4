@@ -1,0 +1,67 @@
+<ng-container *ngrxLet="{ groups: groups$, isLoading: isLoading$ } as state">
+  <tui-loader class="loader" [overlay]="true" [showLoader]="state.isLoading">
+    <cn-scrollable-block>
+      <header class="header">
+        <h2 class="heading">Groups</h2>
+        <div class="header-actions">
+          <cn-update-button [isLoading]="state.isLoading" [timer$]="timer$" (click)="updateGroups()" />
+          <button
+            tuiIconButton
+            size="m"
+            appearance="primary"
+            icon="tuiIconPlus"
+            title="Create new group"
+            [showLoader]="state.isLoading"
+            (click)="showCreateForm()"
+          ></button>
+        </div>
+      </header>
+      <cn-groups-list class="content list" [groups]="state.groups" (remove)="showRemovePrompt($event)" />
+    </cn-scrollable-block>
+  </tui-loader>
+
+  <ng-template
+    #creationForm
+    let-observer
+    [tuiDialogOptions]="{ label: 'Create new group', size: 'm' }"
+    [(tuiDialog)]="isModalOpen"
+  >
+    <form [formGroup]="form" (ngSubmit)="createGroup(observer)">
+      <div class="tui-form__row">
+        <tui-input
+          tuiAutoFocus
+          formControlName="name"
+          tuiHintContent="Group name should contain only letters, numbers and spaces"
+        >
+          Group name
+          <input tuiTextfield />
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+      </div>
+      <div class="tui-form__buttons tui-form__buttons_align_center">
+        <button
+          size="l"
+          tuiButton
+          type="reset"
+          appearance="secondary-destructive"
+          class="tui-form__button"
+          [showLoader]="state.isLoading"
+          (click)="resetForm(observer)"
+        >
+          Cancel
+        </button>
+        <button
+          size="l"
+          tuiButton
+          type="submit"
+          class="tui-form__button"
+          [showLoader]="state.isLoading"
+          [disabled]="form.invalid"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</ng-container>

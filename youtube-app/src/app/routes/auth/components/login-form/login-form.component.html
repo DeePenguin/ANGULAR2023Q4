@@ -1,0 +1,42 @@
+<form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" placeholder="Enter your email" required />
+    <mat-error class="form__error" *ngIf="emailControl.hasError('required')">Required</mat-error>
+    <mat-error class="form__error" *ngIf="emailControl.hasError('email')">
+      Email should match the following format: name@domain.com
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Password</mat-label>
+    <input
+      #password
+      matInput
+      formControlName="password"
+      [type]="isPasswordHidden ? 'password' : 'text'"
+      placeholder="Enter your password"
+      required
+    />
+    <yt-button
+      matSuffix
+      appearance="icon"
+      color="basic"
+      type="button"
+      [icon]="isPasswordHidden ? 'visibility' : 'visibility_off'"
+      (click)="togglePasswordVisibility()"
+    />
+    <mat-error class="form__error" *ngIf="passwordControl.hasError('required')">Required</mat-error>
+    <mat-error class="form__error" *ngIf="passwordControl.hasError('minlength')"
+      >Must be at least 8 characters</mat-error
+    >
+    <mat-error class="form__error" *ngIf="passwordControl.hasError('noSpaces')"
+      >This field can't contain spaces</mat-error
+    >
+    <mat-error class="form__error" *ngIf="passwordControl.hasError('invalidPassword')"
+      >Must have lower case, upper case, numeric and special characters</mat-error
+    >
+  </mat-form-field>
+  <div class="form__row form__row--controls">
+    <yt-button type="submit" [isDisabled]="loginForm.invalid">Login</yt-button>
+  </div>
+</form>

@@ -1,0 +1,7 @@
+<ng-content select=".header" />
+<tui-scrollbar class="content-container" [ngClass]="{ shadow: hasShadow }">
+  <ng-content select=".content" />
+</tui-scrollbar>
+<div class="footer">
+  <ng-content select=".footer" />
+</div>

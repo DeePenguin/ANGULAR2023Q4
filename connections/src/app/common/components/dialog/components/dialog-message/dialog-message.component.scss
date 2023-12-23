@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  width: clamp(250px, 70%, 400px);
+
+  .message {
+    background-color: #46c72759;
+    box-shadow: none;
+  }
+
+  &.outcome {
+    margin-left: auto;
+
+    .message {
+      background-color: #278ec759;
+    }
+  }
+}
+
+.author {
+  font: var(--tui-font-text-m);
+}
+
+.content {
+  font: var(--tui-font-text-m);
+}
+
+.time {
+  text-align: right;
+}

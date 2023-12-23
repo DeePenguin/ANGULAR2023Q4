@@ -1,0 +1,14 @@
+<div *ngrxLet="timer$ as timer" class="timer">
+  <span *ngIf="timer">{{ timer | date: 'mm:ss' }}</span>
+</div>
+<button
+  tuiIconButton
+  class="button"
+  size="m"
+  appearance="primary"
+  icon="tuiIconRefreshCcw"
+  title="Update"
+  [disabled]="isDisabled"
+  [showLoader]="isLoading"
+  (click)="onClick()"
+></button>

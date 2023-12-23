@@ -1,0 +1,49 @@
+.video {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+
+  background-color: #e5e5e5;
+  border-radius: 0 6px 6px;
+
+  &__preview {
+    position: relative;
+
+    flex-basis: 60%;
+    flex-shrink: 0;
+
+    aspect-ratio: 16 / 9;
+
+    background: #373333;
+  }
+
+  &__image {
+    object-fit: contain;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1em;
+    justify-content: space-between;
+
+    padding: 16px 8px;
+
+    border-bottom: 8px solid;
+  }
+
+  &__description {
+    flex-grow: 1;
+    word-break: break-word;
+  }
+
+  &__statistics {
+    width: fit-content;
+    margin: 1em auto 0;
+  }
+
+  @media screen and (width < 900px) {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,17 @@
+<mat-card class="video" *ngIf="video">
+  <div class="video__preview">
+    <img class="video__image" fill alt="{{ video.title }}" ngSrc="{{ video.thumbnails.maxres.url }}" />
+  </div>
+  <div class="video__content" ytBorderColorByDate [date]="video.publishedAt">
+    <mat-card-header>
+      <mat-card-title class="video__title">{{ video.title }}</mat-card-title>
+      <mat-card-subtitle>
+        <time [dateTime]="video.publishedAt">{{ video.publishedAt | date: 'fullDate' }}</time>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="video__description">
+      <p *ngFor="let line of description">{{ line }}</p>
+    </mat-card-content>
+    <yt-video-statistics class="video__statistics" [statistics]="video.statistics" />
+  </div>
+</mat-card>

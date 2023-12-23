@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cd youtube-app
+
+npx commitlint --edit $1

@@ -1,0 +1,41 @@
+<ng-container [ngSwitch]="appearance">
+  <ng-container *ngSwitchCase="'icon'" [ngTemplateOutlet]="iconButton" />
+  <ng-container *ngSwitchCase="'fab'" [ngTemplateOutlet]="fabButton" />
+  <ng-container *ngSwitchDefault [ngTemplateOutlet]="defaultButton" />
+</ng-container>
+
+<ng-template #content>
+  <ng-content />
+</ng-template>
+
+<ng-template #defaultButton>
+  <button
+    class="button"
+    [ngClass]="{ 'flat-side__left': flatSide === 'left', 'flat-side__right': flatSide === 'right' }"
+    mat-flat-button
+    [color]="color"
+    [disabled]="isDisabled"
+    [type]="type"
+  >
+    <ng-container [ngTemplateOutlet]="content" />
+  </button>
+</ng-template>
+
+<ng-template #iconButton>
+  <button class="button icon" mat-icon-button [color]="color" [disabled]="isDisabled" [type]="type">
+    <mat-icon *ngIf="icon; else content">{{ icon }}</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #fabButton>
+  <button
+    class="button fab"
+    [ngClass]="{ 'flat-side__left': flatSide === 'left', 'flat-side__right': flatSide === 'right' }"
+    mat-mini-fab
+    [color]="color"
+    [disabled]="isDisabled"
+    [type]="type"
+  >
+    <mat-icon *ngIf="icon; else content">{{ icon }}</mat-icon>
+  </button>
+</ng-template>

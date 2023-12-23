@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 280px;
+  min-height: 400px;
+  padding: 20px;
+
+  background-color: #e5e5e5;
+  border-bottom: 8px solid;
+
+  .image-container {
+    position: relative;
+    order: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .statistics {
+    order: 1;
+  }
+
+  .title {
+    overflow: hidden;
+    display: -webkit-box;
+    order: 2;
+
+    margin: 0;
+
+    font-weight: 700;
+    text-align: center;
+
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 2;
+  }
+
+  .more-button {
+    order: 3;
+    margin: auto auto 0;
+  }
+}

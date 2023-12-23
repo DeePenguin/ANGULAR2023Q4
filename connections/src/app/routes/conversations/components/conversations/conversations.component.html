@@ -1,0 +1,13 @@
+<ng-container *ngrxLet="{ users: users$, isLoading: isLoading$ } as state">
+  <tui-loader class="loader" [overlay]="true" [showLoader]="state.isLoading">
+    <cn-scrollable-block>
+      <header class="header">
+        <h2 class="heading">People</h2>
+        <div class="header-actions">
+          <cn-update-button [isLoading]="state.isLoading" [timer$]="timer$" (click)="updateList()" />
+        </div>
+      </header>
+      <cn-conversations-list class="content list" [users]="state.users" (createDialog)="createDialog($event)" />
+    </cn-scrollable-block>
+  </tui-loader>
+</ng-container>

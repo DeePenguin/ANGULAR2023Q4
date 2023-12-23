@@ -1,0 +1,33 @@
+<tui-loader class="loader" [overlay]="true" [showLoader]="isLoading">
+  <cn-scrollable-block>
+    <div class="header">
+      <a tuiIconButton type="button" icon="tuiIconArrowLeft" title="Back" size="m" [routerLink]="['/']"></a>
+      <h2 class="heading title">
+        <ng-container *ngIf="dialog">{{ dialog.name || 'there should be name' }}</ng-container>
+      </h2>
+      <div class="header-actions">
+        <ng-container *ngIf="dialog">
+          <cn-update-button *ngIf="updateTimer$" [isLoading]="isLoading" [timer$]="updateTimer$" (click)="onUpdate()" />
+          <button
+            *ngIf="dialog.isRemovable"
+            tuiIconButton
+            size="m"
+            appearance="secondary-destructive"
+            icon="tuiIconClose"
+            title="Remove"
+            (click)="onRemove()"
+          ></button>
+        </ng-container>
+      </div>
+    </div>
+    <ng-container *ngIf="dialog" ngProjectAs=".content">
+      <cn-dialog-messages *ngIf="dialog.messages.length; else empty" class="messages" [messages]="dialog.messages" />
+      <ng-template #empty>
+        <div class="empty">No messages</div>
+      </ng-template>
+    </ng-container>
+    <div class="footer">
+      <cn-dialog-form (send)="onSend($event)" />
+    </div>
+  </cn-scrollable-block>
+</tui-loader>

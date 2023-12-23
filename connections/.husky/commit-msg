@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+cd connections
+
+npx commitlint --edit $1

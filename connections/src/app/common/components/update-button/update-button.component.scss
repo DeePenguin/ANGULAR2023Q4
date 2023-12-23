@@ -1,0 +1,15 @@
+:host {
+  pointer-events: none;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.timer {
+  min-width: 5ch;
+  color: var(--tui-negative);
+}
+
+.button {
+  pointer-events: all;
+}

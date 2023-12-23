@@ -1,0 +1,20 @@
+<tui-island class="wrapper">
+  <ng-container *ngrxLet="{ dialog: dialog$, isLoading: isLoading$, error: error$ } as state">
+    <ng-container *ngIf="state.error; then error; else dialog" />
+    <ng-template #dialog>
+      <cn-dialog
+        class="dialog"
+        [isLoading]="state.isLoading"
+        [dialog]="state.dialog"
+        [updateTimer$]="timer$"
+        (update)="update()"
+        (remove)="showRemovePrompt()"
+        (send)="sendMessage($event)"
+      />
+    </ng-template>
+  </ng-container>
+</tui-island>
+
+<ng-template #error>
+  <cn-not-found class="not-found" />
+</ng-template>

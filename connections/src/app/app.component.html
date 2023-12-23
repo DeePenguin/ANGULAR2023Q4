@@ -1,0 +1,5 @@
+<tui-theme-night *ngIf="isDark$ | async"></tui-theme-night>
+<tui-root class="tui-root" [tuiMode]="mode$ | async">
+  <cn-header class="cn-header" />
+  <router-outlet />
+</tui-root>

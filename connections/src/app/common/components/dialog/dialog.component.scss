@@ -1,0 +1,38 @@
+:host {
+  &,
+  .loader {
+    height: 100%;
+  }
+
+  .header {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 0.5rem;
+
+    .title {
+      flex-grow: 1;
+      margin: 0;
+      word-break: break-word;
+    }
+
+    &-actions {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+    }
+  }
+
+  .messages {
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    margin-top: auto;
+  }
+
+  .empty {
+    margin: auto;
+  }
+}

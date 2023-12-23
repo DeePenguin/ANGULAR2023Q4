@@ -1,0 +1,7 @@
+<form (submit)="onSubmit($event)">
+  <mat-form-field class="search" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Search</mat-label>
+    <input class="search__input" matInput placeholder="Type for search" type="search" [formControl]="search" />
+    <yt-button type="button" matSuffix flatSide="left">Search</yt-button>
+  </mat-form-field>
+</form>

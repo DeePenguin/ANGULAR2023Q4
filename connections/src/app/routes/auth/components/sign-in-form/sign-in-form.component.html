@@ -1,0 +1,38 @@
+<form *ngrxLet="isLoading$ as isLoading" [formGroup]="form" (ngSubmit)="submit()">
+  <h2 class="heading">Sign in</h2>
+  <div class="tui-form__row">
+    <tui-input
+      formControlName="email"
+      tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
+    >
+      Email
+      <input tuiTextfield type="email" autocomplete="email" />
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+  </div>
+  <div class="tui-form__row">
+    <tui-input-password formControlName="password" tuiHintContent="Enter your password">
+      Password
+      <input tuiTextfield type="password" />
+      <span class="tui-required"></span>
+    </tui-input-password>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+  </div>
+  <div class="tui-form__row text-centered">
+    <tui-error [error]="[] | tuiFieldError | async" />
+  </div>
+
+  <div class="tui-form__buttons tui-form__buttons_align_center">
+    <button
+      size="l"
+      tuiButton
+      type="submit"
+      class="tui-form__button"
+      [showLoader]="isLoading"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</form>

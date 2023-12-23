@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+cd youtube-app
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+protected_branch_regex="^(develop|main)\/.*$"
+
+message="You can't commit directly to this branch. Please switch to another branch."
+
+if [[ $branch =~ $protected_branch_regex ]]
+then
+    echo "$message"
+    exit 1
+fi
+
+npx lint-staged --concurrent false --relative

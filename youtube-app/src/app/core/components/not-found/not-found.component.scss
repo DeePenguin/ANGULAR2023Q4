@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 30px;
+
+  .title {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 20px;
+    align-items: center;
+    justify-content: center;
+
+    &__text {
+      margin: 0;
+    }
+  }
+}

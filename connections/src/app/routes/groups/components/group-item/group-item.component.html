@@ -1,0 +1,10 @@
+<a class="link" tuiLink [routerLink]="['/groups', group.id]">{{ group.name }}</a>
+<button
+  *ngIf="group.isRemovable"
+  tuiIconButton
+  size="s"
+  icon="tuiIconClose"
+  class="tui-space_right-1"
+  title="Remove"
+  (click)="onRemove()"
+></button>

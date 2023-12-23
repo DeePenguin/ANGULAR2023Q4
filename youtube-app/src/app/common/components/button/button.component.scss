@@ -1,0 +1,55 @@
+:host {
+  display: inline-block;
+
+  &.disabled {
+    pointer-events: none;
+  }
+
+  .button {
+    $radius: 5px;
+
+    user-select: none;
+    min-height: 40px;
+    box-shadow: 2px 0 4px 0 #00000063;
+
+    &:disabled,
+    &:hover {
+      box-shadow: none;
+    }
+
+    &.fab {
+      border-radius: $radius;
+
+      &:hover,
+      &:active {
+        box-shadow: none;
+      }
+
+      &:focus {
+        box-shadow: 2px 0 4px 0 #00000063;
+      }
+    }
+
+    &.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 40px;
+      height: 40px;
+      padding: 0;
+
+      box-shadow: none;
+    }
+
+    &.flat-side {
+      &__left {
+        border-radius: 0 $radius $radius 0;
+      }
+
+      &__right {
+        border-radius: $radius 0 0 $radius;
+      }
+    }
+  }
+}

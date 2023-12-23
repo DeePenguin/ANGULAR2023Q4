@@ -1,0 +1,21 @@
+:host {
+  display: block;
+
+  width: 100%;
+  padding: 1em;
+
+  background-color: var(--base-background);
+  backdrop-filter: blur(3px);
+  box-shadow: var(--tui-shadow-navigation);
+
+  .wrapper {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 600;
+    }
+  }
+}

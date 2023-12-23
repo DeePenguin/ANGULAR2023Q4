@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 30px;
+
+  .video-details {
+    flex-grow: 1;
+  }
+}

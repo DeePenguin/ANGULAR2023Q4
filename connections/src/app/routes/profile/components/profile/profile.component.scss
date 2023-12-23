@@ -1,0 +1,32 @@
+.table {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.name {
+  &-static {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-edit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+
+    .input {
+      flex-grow: 1;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+      justify-content: flex-end;
+
+      max-width: fit-content;
+    }
+  }
+}

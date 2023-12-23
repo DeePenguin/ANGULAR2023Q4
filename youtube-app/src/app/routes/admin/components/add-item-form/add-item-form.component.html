@@ -1,0 +1,75 @@
+<form class="form" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" type="text" placeholder="Enter card title" required />
+    <mat-error *ngIf="titleControl.hasError('required')" class="form__error">Please enter a title</mat-error>
+    <mat-error *ngIf="titleControl.hasError('minlength')" class="form__error"> The title is too short </mat-error>
+    <mat-error *ngIf="titleControl.hasError('maxlength')" class="form__error"> The title is too long </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput formControlName="description" type="text" placeholder="Enter card description" />
+    <mat-error *ngIf="descriptionControl.hasError('maxlength')" class="form__error">
+      The description is too long
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Image link</mat-label>
+    <input matInput formControlName="imageLink" type="text" placeholder="Enter image link" required />
+    <mat-error *ngIf="imageLinkControl.hasError('required')" class="form__error">
+      Please enter a link to the image
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Video link</mat-label>
+    <input matInput formControlName="videoLink" type="text" placeholder="Enter video link" required />
+    <mat-error *ngIf="videoLinkControl.hasError('required')" class="form__error">
+      Please enter a link to the video
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__field" appearance="outline">
+    <mat-label>Creation date</mat-label>
+    <input
+      matInput
+      formControlName="creationDate"
+      placeholder="Enter creation date"
+      required
+      [matDatepicker]="picker"
+      [max]="maxDate"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="creationDateControl.hasError('required')" class="form__error"
+      >Please enter a creation date</mat-error
+    >
+    <mat-error *ngIf="creationDateControl.hasError('date')" class="form__error"> The date is invalid </mat-error>
+  </mat-form-field>
+  <fieldset class="form__fieldset">
+    <legend class="form__legend mat-h3">Tags</legend>
+    <ng-container *ngFor="let control of tagsControl.controls; let i = index; trackBy: trackByIndex">
+      <mat-form-field class="form__field" appearance="outline">
+        <mat-label>Tag</mat-label>
+        <input matInput type="text" required placeholder="Enter a tag" [formControl]="control" />
+        <yt-button
+          *ngIf="tagsControl.controls.length > 1"
+          matSuffix
+          color="basic"
+          type="button"
+          appearance="icon"
+          icon="close"
+          (click)="removeTagControl(i)"
+        ></yt-button>
+        <mat-error *ngIf="control.hasError('required')" class="form__error">Please enter a tag</mat-error>
+        <mat-error *ngIf="control.hasError('minlength')" class="form__error"> The tag is too short</mat-error>
+      </mat-form-field>
+    </ng-container>
+    <div class="form__row form__row--controls">
+      <yt-button type="button" [isDisabled]="tagsControl.length >= 5" (click)="addTagControl()">Add tag</yt-button>
+    </div>
+  </fieldset>
+  <div class="form__row form__row--controls">
+    <yt-button type="reset" color="warn" [isDisabled]="!itemForm.dirty" (click)="onReset()">Reset</yt-button>
+    <yt-button type="submit" [isDisabled]="itemForm.invalid">Create card</yt-button>
+  </div>
+</form>

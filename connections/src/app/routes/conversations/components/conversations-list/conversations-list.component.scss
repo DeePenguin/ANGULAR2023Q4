@@ -1,0 +1,8 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.user:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,45 @@
+<form *ngrxLet="isLoading$ as isLoading" [formGroup]="form" (ngSubmit)="submit()">
+  <h2 class="heading">Sign up</h2>
+  <div class="tui-form__row">
+    <tui-input formControlName="name" tuiHintContent="Name can contain only letters and spaces">
+      Name
+      <input tuiTextfield type="text" autocomplete="name" />
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+  </div>
+  <div class="tui-form__row">
+    <tui-input
+      formControlName="email"
+      tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
+    >
+      Email
+      <input tuiTextfield type="email" autocomplete="email" />
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+  </div>
+  <div class="tui-form__row">
+    <tui-input-password
+      formControlName="password"
+      tuiHintContent="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one special character and one number"
+    >
+      Password
+      <input tuiTextfield type="password" />
+      <span class="tui-required"></span>
+    </tui-input-password>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+  </div>
+  <div class="tui-form__buttons tui-form__buttons_align_center">
+    <button
+      size="l"
+      tuiButton
+      type="submit"
+      class="tui-form__button"
+      [showLoader]="isLoading"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</form>

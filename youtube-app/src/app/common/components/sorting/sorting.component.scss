@@ -1,0 +1,25 @@
+.sorting {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .button {
+    padding-left: 2ch;
+
+    .icon {
+      display: inline-flex;
+      max-width: 2ch;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    &.mat-button-toggle-checked {
+      color: #fff;
+      background: #4051b5;
+
+      .icon {
+        opacity: 1;
+      }
+    }
+  }
+}

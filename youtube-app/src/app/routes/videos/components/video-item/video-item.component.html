@@ -1,0 +1,8 @@
+<mat-card class="card" ytBorderColorByDate [date]="video.publishedAt">
+  <mat-card-title class="title mat-h3">{{ video.title }}</mat-card-title>
+  <yt-video-statistics class="statistics mat-caption" [statistics]="video.statistics" />
+  <div class="image-container">
+    <img fill alt="{{ video.title }}" ngSrc="{{ video.thumbnails.medium.url }}" />
+  </div>
+  <yt-button [routerLink]="['/videos', video.id]" class="more-button">more...</yt-button>
+</mat-card>

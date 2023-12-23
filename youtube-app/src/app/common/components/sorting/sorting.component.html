@@ -1,0 +1,15 @@
+<div class="sorting">
+  <span class="sorting__label">Sort by:</span>
+  <mat-button-toggle-group name="sortBy" aria-label="Sort by">
+    <mat-button-toggle
+      *ngFor="let criterion of criteria; trackBy: trackCriteria"
+      class="button"
+      [value]="criterion"
+      (change)="onClick($event.value)"
+      ><span>{{ criterion | titlecase }}</span>
+      <span class="icon">
+        <mat-icon [inline]="true">{{ icon }}</mat-icon>
+      </span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

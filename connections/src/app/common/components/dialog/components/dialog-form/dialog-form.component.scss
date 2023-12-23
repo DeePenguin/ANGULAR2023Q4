@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  padding-top: 0.5rem;
+
+  ::ng-deep [tuiWrapper][data-appearance='textfield'] {
+    &,
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.send {
+  max-width: fit-content;
+}

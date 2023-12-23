@@ -1,0 +1,22 @@
+{
+  "overrides": [
+    {
+      "files": ["**/*.css"],
+      "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
+      "rules": {}
+    },
+    {
+      "files": ["**/*.scss"],
+      "extends": ["stylelint-config-standard", "stylelint-config-standard-scss", "stylelint-config-clean-order"],
+      "rules": {
+        "no-empty-source": null
+      }
+    }
+  ],
+  "rules": {
+    "prettier/prettier": true,
+    "declaration-block-no-duplicate-properties": true,
+    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }]
+  },
+  "plugins": ["stylelint-order", "stylelint-prettier"]
+}

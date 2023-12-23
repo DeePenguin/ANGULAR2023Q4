@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: auto;
+
+  .user {
+    display: inline-flex;
+    flex-wrap: nowrap;
+  }
+}

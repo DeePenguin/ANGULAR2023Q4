@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="header__container">
+    <div class="logo">
+      <a routerLink="/" class="logo__link">
+        <img class="logo__image" ngSrc="assets/icons/logo.svg" alt="logo" width="55" height="40" priority />
+      </a>
+    </div>
+    <div class="search">
+      <yt-search-form (valueChange)="changeSearchQuery($event)" />
+      <yt-button appearance="fab" icon="tune" (click)="toggleSettingsVisibility()" />
+    </div>
+    <div class="profile">
+      <yt-user-profile />
+    </div>
+    <yt-search-settings class="search-settings" [class.hidden]="!isSearchSettingsVisible" />
+  </div>
+</header>

@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --header-height: 4.5rem;
+  --scrollable-background: #ae6fdf38;
+  --base-background: #6a01a933;
+}
+
+.cn-header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  max-height: var(--header-height);
+}
+
+.page {
+  display: block;
+  margin-top: var(--header-height);
+  padding: 2em 1em;
+
+  &--fixed {
+    height: calc(100dvh - var(--header-height));
+  }
+
+  @media screen and (width < 400px) {
+    padding: 1em 0.5em;
+  }
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tui-island {
+  box-sizing: border-box !important;
+  background-color: var(--base-background);
+  box-shadow: var(--tui-shadow);
+}
+
+.heading {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font: var(--tui-font-heading-5);
+  text-align: center;
+}
+
+.text-centered {
+  text-align: center;
+}
