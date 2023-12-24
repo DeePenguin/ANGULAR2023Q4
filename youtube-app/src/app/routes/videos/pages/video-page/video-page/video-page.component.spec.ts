@@ -4,6 +4,8 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { ActivatedRoute } from '@angular/router'
 import { of } from 'rxjs'
 
+import { VIDEOS_SOURCE } from '../../../tokens/videos-source.token'
+import { VideosFacade } from '../../../videos-store/services/videos.facade'
 import { VideoPageComponent } from './video-page.component'
 import { ButtonComponent } from 'src/app/common/components/button/button.component'
 import { VideoItem } from 'src/app/repositories/youtube/models/video/video-item.model'
@@ -50,12 +52,19 @@ const video: VideoItem = {
   },
 }
 
+class VideosFacadeStub {
+  public isLoading = of(false)
+  public favorites$ = of([])
+  public video$ = of({ videoItem: video })
+}
+
 @Component({
   selector: 'yt-video-details',
   template: ``,
 })
 class TestComponent {
   @Input() public video!: VideoItem
+  @Input() public isFavorite!: Boolean
 }
 
 describe('VideoPageComponent', () => {
@@ -66,7 +75,12 @@ describe('VideoPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [VideoPageComponent, TestComponent],
       imports: [ButtonComponent],
-      providers: [Location, { provide: ActivatedRoute, useValue: { data: of({ video }) } }],
+      providers: [
+        Location,
+        { provide: ActivatedRoute, useValue: { data: of({ video }) } },
+        { provide: VideosFacade, useClass: VideosFacadeStub },
+        { provide: VIDEOS_SOURCE, useValue: 'video$' },
+      ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(VideoPageComponent)

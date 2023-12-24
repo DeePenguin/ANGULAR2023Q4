@@ -11,8 +11,8 @@ import { LocalStorageService } from '../../storage/services/local-storage.servic
 export class AuthorizationService {
   private storageKey = 'fakeAuth'
   private initialUserInfo = this.localStorageService.getItem<UserInfo>(this.storageKey)
-  private userInfoSource$$ = new BehaviorSubject<UserInfo | null>(this.initialUserInfo)
-  public userInfo$ = this.userInfoSource$$.asObservable()
+  private userInfo$$ = new BehaviorSubject<UserInfo | null>(this.initialUserInfo)
+  public userInfo$ = this.userInfo$$.asObservable()
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -22,13 +22,13 @@ export class AuthorizationService {
   public login(email: string): void {
     const userInfo = { name: email.split('@')[0] }
     this.localStorageService.setItem(this.storageKey, userInfo)
-    this.userInfoSource$$.next(userInfo)
+    this.userInfo$$.next(userInfo)
     this.router.navigate(['/'], { replaceUrl: true }).catch(console.error)
   }
 
   public logout(): void {
     this.localStorageService.removeItem(this.storageKey)
-    this.userInfoSource$$.next(null)
+    this.userInfo$$.next(null)
     this.router.navigate(['/auth']).catch(console.error)
   }
 }

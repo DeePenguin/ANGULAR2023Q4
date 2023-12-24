@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+<form #formDirective="ngForm" class="form" [formGroup]="itemForm" (ngSubmit)="onSubmit(formDirective)">
   <mat-form-field class="form__field" appearance="outline">
     <mat-label>Title</mat-label>
     <input matInput formControlName="title" type="text" placeholder="Enter card title" required />

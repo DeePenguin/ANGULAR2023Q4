@@ -1,1 +1,18 @@
-<yt-videos-list [videos]="(sortedVideos$ | async) || []" />
+<ng-container *rxLet="pagination$; let pagination">
+  <ng-container *rxLet="customVideos$; let customVideos">
+    <mat-expansion-panel *rxIf="pagination.pageIndex === 0 && customVideos.length">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Show custom videos </mat-panel-title>
+      </mat-expansion-panel-header>
+      <yt-videos-list [videosSource]="customVideos$" />
+    </mat-expansion-panel>
+  </ng-container>
+  <yt-videos-list />
+  <mat-paginator
+    [length]="pagination.length"
+    [pageSize]="pagination.pageSize"
+    [pageIndex]="pagination.pageIndex"
+    aria-label="Select page"
+    (page)="changePage($event)"
+  />
+</ng-container>

@@ -21,6 +21,17 @@
     object-fit: contain;
   }
 
+  &__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  &__header {
+    flex-wrap: wrap;
+  }
+
   &__content {
     display: flex;
     flex-direction: column;

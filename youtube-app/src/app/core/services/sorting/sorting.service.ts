@@ -8,10 +8,10 @@ import type { SortingOptions } from 'src/app/common/models/sorting-options.model
   providedIn: 'root',
 })
 export class SortingService {
-  private sortingSettingsSource$$ = new BehaviorSubject<null | SortingOptions<SortingCriteria[]>>(null)
-  public sortingSettings$ = this.sortingSettingsSource$$.asObservable()
+  private sortingSettings$$ = new BehaviorSubject<null | SortingOptions<SortingCriteria[]>>(null)
+  public sortingSettings$ = this.sortingSettings$$.asObservable()
 
   public changeSorting(settings: SortingOptions<SortingCriteria[]>): void {
-    this.sortingSettingsSource$$.next(settings)
+    this.sortingSettings$$.next(settings)
   }
 }

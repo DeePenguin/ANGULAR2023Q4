@@ -13,6 +13,11 @@ const mockAuthService = {
   logout: jest.fn(),
 }
 
+const formValue = {
+  email: 'example@example.com',
+  password: 'Password1-!',
+}
+
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent
   let fixture: ComponentFixture<LoginFormComponent>
@@ -31,5 +36,27 @@ describe('LoginFormComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+  it('submit button should be disabled by default', () => {
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button[type="submit"]')
+    const isButtonDisabled = button?.attributes.getNamedItem('disabled')?.value
+    expect(isButtonDisabled).toEqual('true')
+  })
+
+  it('submit button should be enabled when form is valid', () => {
+    component.loginForm.setValue(formValue)
+    fixture.detectChanges()
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button[type="submit"]')
+    const isButtonDisabled = button?.attributes.getNamedItem('disabled')
+    expect(isButtonDisabled).toBeFalsy()
+  })
+
+  it('click on submit button should call login', () => {
+    const spyFn = jest.spyOn(mockAuthService, 'login')
+    component.loginForm.setValue(formValue)
+    fixture.detectChanges()
+    const button = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('button[type="submit"]')!
+    button.click()
+    expect(spyFn).toBeCalled()
   })
 })

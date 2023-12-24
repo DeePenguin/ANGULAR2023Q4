@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { combineLatest, map } from 'rxjs'
+import type { PageEvent } from '@angular/material/paginator'
 
-import { SortingService } from 'src/app/core/services/sorting/sorting.service'
-import { VideosService } from 'src/app/core/services/videos/videos.service'
-import { sortVideos } from 'src/app/repositories/youtube/helpers/sort-videos.helper'
+import { VideosFacade } from '../../videos-store/services/videos.facade'
 
 @Component({
   selector: 'yt-videos-page',
@@ -12,14 +10,18 @@ import { sortVideos } from 'src/app/repositories/youtube/helpers/sort-videos.hel
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideosPageComponent {
-  private videos$ = this.videosService.videos$
-  private sortingSettings$ = this.sortingService.sortingSettings$
-  public sortedVideos$ = combineLatest([this.videos$, this.sortingSettings$]).pipe(
-    map(([videos, sortingSettings]) => (sortingSettings ? sortVideos(videos, sortingSettings) : videos)),
-  )
+  public pagination$ = this.videosFacade.pagination$
+  public customVideos$ = this.videosFacade.customVideos$
 
-  constructor(
-    private videosService: VideosService,
-    private sortingService: SortingService,
-  ) {}
+  constructor(private videosFacade: VideosFacade) {}
+
+  public changePage({ pageIndex, previousPageIndex }: PageEvent): void {
+    if (previousPageIndex === undefined) {
+      return
+    }
+
+    previousPageIndex < pageIndex
+      ? this.videosFacade.getNextPage(pageIndex)
+      : this.videosFacade.getPreviousPage(pageIndex)
+  }
 }

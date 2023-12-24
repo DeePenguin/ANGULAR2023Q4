@@ -114,7 +114,7 @@
     "deploy": {
       "executor": "angular-cli-ghpages:deploy",
       "options": {
-        "baseHref": "https://rolling-scopes-school.github.io/deepenguin-ANGULAR2023Q4/"
+        "baseHref": "https://deepenguin.github.io/ANGULAR2023Q4/youtube/"
       }
     }
   }

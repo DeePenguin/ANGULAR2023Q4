@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, type OnDestroy, type 
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { Subscription } from 'rxjs'
 
 import { ButtonComponent } from '../button/button.component'
@@ -11,7 +10,7 @@ import { ButtonComponent } from '../button/button.component'
   selector: 'yt-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss'],
-  imports: [ButtonComponent, MatFormFieldModule, MatInputModule, NoopAnimationsModule, ReactiveFormsModule],
+  imports: [ButtonComponent, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })

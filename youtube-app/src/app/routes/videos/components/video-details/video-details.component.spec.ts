@@ -3,6 +3,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { MatCardModule } from '@angular/material/card'
 
 import { VideoDetailsComponent } from './video-details.component'
+import { FavoriteButtonComponent } from 'src/app/common/components/favorite-button/favorite-button.component'
 import { VideoStatisticsComponent } from 'src/app/common/components/video-statistics/video-statistics.component'
 import { BorderColorByDateDirective } from 'src/app/common/directives/border-color-by-date/border-color-by-date.directive'
 import type { VideoItem } from 'src/app/repositories/youtube/models/video/video-item.model'
@@ -56,7 +57,13 @@ describe('VideoDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideoDetailsComponent],
-      imports: [VideoStatisticsComponent, BorderColorByDateDirective, MatCardModule, NgOptimizedImage],
+      imports: [
+        VideoStatisticsComponent,
+        BorderColorByDateDirective,
+        MatCardModule,
+        FavoriteButtonComponent,
+        NgOptimizedImage,
+      ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(VideoDetailsComponent)

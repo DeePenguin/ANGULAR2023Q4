@@ -2,6 +2,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { MatNativeDateModule } from '@angular/material/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule } from '@angular/router'
 
 import { dateToColorMap } from '../common/constants/date-to-color-map.const'
@@ -17,6 +18,7 @@ import { appRoutes } from './app.routes'
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     StorageModule.forRoot({ config: { prefix: storageKeyPrefix } }),
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     CoreModule,

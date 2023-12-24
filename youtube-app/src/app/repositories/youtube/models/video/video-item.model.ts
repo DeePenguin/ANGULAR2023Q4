@@ -8,7 +8,7 @@ export interface VideoItem {
   description: string
   title: string
   publishedAt: string
-  thumbnails: Record<VideoThumbnailSize, VideoThumbnail>
+  thumbnails: Partial<Record<VideoThumbnailSize, VideoThumbnail>>
   statistics: VideoStatistics
   tags: string[]
 }

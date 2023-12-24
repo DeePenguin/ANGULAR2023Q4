@@ -1,3 +1,23 @@
-<div class="videos-list">
-  <yt-video-item *ngFor="let video of videos; trackBy: trackById" [video]="video" />
-</div>
+<ng-container *rxIf="isLoading$; then loading; else loaded" />
+
+<ng-template #empty>
+  <div class="content">No videos found. Try to search something...</div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="content"><mat-spinner /></div>
+</ng-template>
+
+<ng-template #loaded>
+  <ng-container *rxLet="videos$; let videos">
+    <ng-container *rxIf="videos.length; else empty">
+      <yt-video-item
+        *rxFor="let video of videos; trackBy: 'id'"
+        [video]="video"
+        [isFavorite]="!!(isFavorite(video.id) | async)"
+        (toggleFavorite)="toggleFavorite($event)"
+        (remove)="remove($event)"
+      />
+    </ng-container>
+  </ng-container>
+</ng-template>

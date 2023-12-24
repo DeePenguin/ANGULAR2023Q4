@@ -5,9 +5,9 @@ import { BehaviorSubject } from 'rxjs'
   providedIn: 'root',
 })
 export class FilterService {
-  private filterQuerySource$$ = new BehaviorSubject<string>('')
+  private filterQuery$$ = new BehaviorSubject<string>('')
   private query?: string
-  public filterQuery$ = this.filterQuerySource$$.asObservable()
+  public filterQuery$ = this.filterQuery$$.asObservable()
 
   public changeQuery(newQuery: string): void {
     const query = newQuery.trim().toLowerCase()
@@ -17,6 +17,6 @@ export class FilterService {
     }
 
     this.query = query
-    this.filterQuerySource$$.next(this.query)
+    this.filterQuery$$.next(this.query)
   }
 }

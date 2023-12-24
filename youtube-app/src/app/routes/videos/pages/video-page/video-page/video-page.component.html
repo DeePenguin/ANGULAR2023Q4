@@ -1,2 +1,8 @@
 <yt-button flatSide="right" appearance="fab" icon="arrow_back" (click)="goBack()" />
-<yt-video-details class="video-details" [video]="video$ | async" />
+<yt-video-details
+  class="video-details"
+  [video]="video$ | async"
+  [isFavorite]="!!(isFavorite$ | async)"
+  (toggleFavorite)="toggleFavorite($event)"
+  (remove)="remove($event)"
+/>

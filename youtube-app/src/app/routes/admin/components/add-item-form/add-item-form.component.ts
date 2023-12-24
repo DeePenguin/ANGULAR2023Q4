@@ -1,7 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { type FormArray, type FormControl, NonNullableFormBuilder, Validators } from '@angular/forms'
+import {
+  type FormArray,
+  type FormControl,
+  type FormGroupDirective,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms'
 
+import { convertItemFormToCustomVideo } from '../../helpers/convert-item-form-to-custom-video.helper'
 import { dateValidator } from 'src/app/common/validators/date.validator'
+import { VideosFacade } from 'src/app/routes/videos/videos-store/services/videos.facade'
 
 @Component({
   selector: 'yt-add-item-form',
@@ -20,17 +28,22 @@ export class AddItemFormComponent {
     tags: this.fb.array([this.fb.control('', [Validators.required, Validators.minLength(3)])], Validators.required),
   })
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private videosFacade: VideosFacade,
+  ) {}
 
-  public onSubmit(): void {
+  public onSubmit(form: FormGroupDirective): void {
+    const formValue = convertItemFormToCustomVideo(this.itemForm.getRawValue())
+    this.videosFacade.addCustomVideo(formValue)
     this.onReset()
+    form.resetForm()
   }
 
   public onReset(): void {
     this.itemForm.reset()
     this.tagsControl.clear()
     this.addTagControl()
-    this.itemForm.markAsUntouched()
   }
 
   public trackByIndex(index: number): number {

@@ -1,12 +1,16 @@
 import { Component, Input } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { LetDirective } from '@rx-angular/template/let'
 import { of } from 'rxjs'
 
+import { VideosFacade } from '../../videos-store/services/videos.facade'
 import { VideosPageComponent } from './videos-page.component'
-import { VideosService } from 'src/app/core/services/videos/videos.service'
 
-const mockService = {
-  videos$: of([]),
+class VideosFacadeStub {
+  public customVideo$ = of([])
+  public pagination$ = of({})
 }
 
 @Component({
@@ -24,7 +28,8 @@ describe('VideosPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideosPageComponent, TestComponent],
-      providers: [{ provide: VideosService, useFactory: () => mockService }],
+      imports: [MatPaginatorModule, MatExpansionModule, LetDirective],
+      providers: [{ provide: VideosFacade, useClass: VideosFacadeStub }],
     }).compileComponents()
 
     fixture = TestBed.createComponent(VideosPageComponent)

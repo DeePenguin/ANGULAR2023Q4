@@ -1,8 +1,41 @@
 <mat-card class="card" ytBorderColorByDate [date]="video.publishedAt">
-  <mat-card-title class="title mat-h3">{{ video.title }}</mat-card-title>
-  <yt-video-statistics class="statistics mat-caption" [statistics]="video.statistics" />
+  <mat-card-header class="header">
+    <mat-card-title class="title mat-h3">{{ video.title }}</mat-card-title>
+    <div class="header__actions">
+      <ng-container *ngIf="isCustom(video); then customHeaderActions; else commonHeaderActions" />
+    </div>
+  </mat-card-header>
+  <yt-video-statistics *ngIf="!isCustom(video)" class="statistics mat-caption" [statistics]="video.statistics" />
   <div class="image-container">
-    <img fill alt="{{ video.title }}" ngSrc="{{ video.thumbnails.medium.url }}" />
+    <ng-container *ngIf="isCustom(video); then customThumbnail; else commonThumbnail" />
   </div>
-  <yt-button [routerLink]="['/videos', video.id]" class="more-button">more...</yt-button>
+  <ng-container *ngIf="isCustom(video); then customLink; else commonLink" />
 </mat-card>
+
+<ng-template #customHeaderActions>
+  <yt-button icon="delete" appearance="icon" (click)="onRemove(video.id)" />
+</ng-template>
+
+<ng-template #commonHeaderActions>
+  <yt-fav-button [isFavorite]="isFavorite" (click)="onToggleFavorite(video.id)" />
+</ng-template>
+
+<ng-template #customThumbnail>
+  <img fill class="image" alt="{{ video.title }}" ngSrc="{{ $any(video).imageLink }}" />
+</ng-template>
+
+<ng-template #commonThumbnail>
+  <img
+    fill
+    alt="{{ video.title }}"
+    ngSrc="{{ $any(video).thumbnails?.medium?.url || $any(video)?.thumbnails?.default?.url || '' }}"
+  />
+</ng-template>
+
+<ng-template #customLink>
+  <yt-button [routerLink]="['/videos', 'custom', video.id]" class="more-button">more...</yt-button>
+</ng-template>
+
+<ng-template #commonLink>
+  <yt-button [routerLink]="['/videos', video.id]" class="more-button">more...</yt-button>
+</ng-template>

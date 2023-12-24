@@ -1,6 +1,6 @@
 export interface VideoStatisticsApi {
-  viewCount: string
+  viewCount?: string
   likeCount?: string
-  commentCount: string
-  favoriteCount: string
+  commentCount?: string
+  favoriteCount?: string
 }

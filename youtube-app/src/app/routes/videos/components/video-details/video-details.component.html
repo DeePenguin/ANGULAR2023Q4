@@ -1,17 +1,50 @@
-<mat-card class="video" *ngIf="video">
-  <div class="video__preview">
-    <img class="video__image" fill alt="{{ video.title }}" ngSrc="{{ video.thumbnails.maxres.url }}" />
-  </div>
-  <div class="video__content" ytBorderColorByDate [date]="video.publishedAt">
-    <mat-card-header>
-      <mat-card-title class="video__title">{{ video.title }}</mat-card-title>
-      <mat-card-subtitle>
-        <time [dateTime]="video.publishedAt">{{ video.publishedAt | date: 'fullDate' }}</time>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="video__description">
-      <p *ngFor="let line of description">{{ line }}</p>
-    </mat-card-content>
-    <yt-video-statistics class="video__statistics" [statistics]="video.statistics" />
-  </div>
-</mat-card>
+<ng-container *ngIf="video">
+  <mat-card class="video">
+    <div class="video__preview">
+      <ng-container *ngIf="isCustom(video); then customThumbnail; else commonThumbnail" />
+    </div>
+    <div class="video__content" ytBorderColorByDate [date]="video.publishedAt">
+      <mat-card-header class="video__header">
+        <mat-card-title-group>
+          <mat-card-title>{{ video.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <time [dateTime]="video.publishedAt">{{ video.publishedAt | date: 'fullDate' }}</time>
+          </mat-card-subtitle>
+        </mat-card-title-group>
+        <div class="video__actions">
+          <ng-container *ngIf="isCustom(video); then customHeaderActions; else commonHeaderActions" />
+        </div>
+      </mat-card-header>
+      <mat-card-content class="video__description">
+        <p *ngFor="let line of description">{{ line }}</p>
+      </mat-card-content>
+      <yt-video-statistics *ngIf="!isCustom(video)" class="video__statistics" [statistics]="video.statistics" />
+    </div>
+  </mat-card>
+
+  <ng-template #customHeaderActions>
+    <yt-button icon="delete" appearance="icon" [isDisabled]="isRemoveButtonDisabled" (click)="onRemove(video.id)" />
+  </ng-template>
+
+  <ng-template #commonHeaderActions>
+    <yt-fav-button [isFavorite]="isFavorite" (click)="onToggleFavorite(video.id)" />
+  </ng-template>
+
+  <ng-template #customThumbnail>
+    <img fill alt="{{ video.title }}" ngSrc="{{ $any(video).imageLink }}" />
+  </ng-template>
+
+  <ng-template #commonThumbnail>
+    <img
+      class="video__image"
+      fill
+      alt="{{ video.title }}"
+      ngSrc="{{
+        $any(video).thumbnails.maxres?.url ||
+          $any(video).thumbnails.standard?.url ||
+          $any(video).thumbnails.high?.url ||
+          ''
+      }}"
+    />
+  </ng-template>
+</ng-container>

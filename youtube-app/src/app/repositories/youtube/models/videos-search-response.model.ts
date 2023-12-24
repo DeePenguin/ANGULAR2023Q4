@@ -6,6 +6,7 @@ export interface VideosSearchResponse {
   etag: string
   items: SearchItemApi[]
   pageInfo: PageInfo
-  nextPageToken: string
+  nextPageToken?: string
+  prevPageToken?: string
   regionCode: string
 }

@@ -7,8 +7,8 @@ export const convertVideoStatisticsApiToVideoStatistics = ({
   commentCount,
   favoriteCount,
 }: VideoStatisticsApi): VideoStatistics => ({
-  viewCount: Number(viewCount),
+  viewCount: Number(viewCount) || 0,
   likeCount: Number(likeCount) || 0,
-  commentCount: Number(commentCount),
-  favoriteCount: Number(favoriteCount),
+  commentCount: Number(commentCount) || 0,
+  favoriteCount: Number(favoriteCount) || 0,
 })

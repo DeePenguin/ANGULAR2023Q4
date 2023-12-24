@@ -8,6 +8,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AddItemFormComponent } from './add-item-form.component'
 import { ButtonComponent } from 'src/app/common/components/button/button.component'
+import { VideosFacade } from 'src/app/routes/videos/videos-store/services/videos.facade'
+
+class VideosFacadeStub {
+  public addCustomVideo(): void {
+    jest.fn()
+  }
+}
 
 describe('AddItemFormComponent', () => {
   let component: AddItemFormComponent
@@ -25,6 +32,7 @@ describe('AddItemFormComponent', () => {
         MatNativeDateModule,
         NoopAnimationsModule,
       ],
+      providers: [{ provide: VideosFacade, useClass: VideosFacadeStub }],
     }).compileComponents()
 
     fixture = TestBed.createComponent(AddItemFormComponent)

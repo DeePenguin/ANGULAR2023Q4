@@ -7,7 +7,7 @@ export interface VideoSnippetApi {
   channelTitle: string
   title: string
   description: string
-  thumbnails: Record<VideoThumbnailSize, VideoThumbnail>
+  thumbnails: Record<VideoThumbnailSize, VideoThumbnail | undefined>
   tags: string[]
   categoryId: string
   liveBroadcastContent: string

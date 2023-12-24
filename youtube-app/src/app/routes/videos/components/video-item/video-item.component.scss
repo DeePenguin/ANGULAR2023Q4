@@ -10,22 +10,42 @@
   background-color: #e5e5e5;
   border-bottom: 8px solid;
 
-  .image-container {
-    position: relative;
-    order: 0;
-    aspect-ratio: 16 / 9;
+  .image {
+    object-fit: contain;
+
+    &-container {
+      position: relative;
+      order: 0;
+      aspect-ratio: 16 / 9;
+      background: #373333;
+    }
   }
 
   .statistics {
     order: 1;
   }
 
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    order: 2;
+    padding: 0;
+
+    &__actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+
   .title {
     overflow: hidden;
     display: -webkit-box;
-    order: 2;
 
+    min-height: 2lh;
     margin: 0;
+    padding: 0 6px;
 
     font-weight: 700;
     text-align: center;

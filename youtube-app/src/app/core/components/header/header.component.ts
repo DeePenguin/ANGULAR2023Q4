@@ -1,12 +1,12 @@
 import { NgOptimizedImage } from '@angular/common'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { RouterModule } from '@angular/router'
 
 import { SearchSettingsComponent } from './components/search-settings/search-settings.component'
 import { UserProfileComponent } from './components/user-profile/user-profile.component'
+import { HeaderControllerService } from './header.controller'
 import { ButtonComponent } from 'src/app/common/components/button/button.component'
 import { SearchFormComponent } from 'src/app/common/components/search-form/search-form.component'
-import { SearchService } from 'src/app/core/services/search/search.service'
 
 @Component({
   selector: 'yt-header',
@@ -21,19 +21,28 @@ import { SearchService } from 'src/app/core/services/search/search.service'
     SearchFormComponent,
     ButtonComponent,
   ],
+  providers: [HeaderControllerService],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   public isSearchSettingsVisible = false
 
-  constructor(private searchService: SearchService) {}
+  constructor(private controller: HeaderControllerService) {}
+
+  public ngOnInit(): void {
+    this.controller.init()
+  }
 
   public toggleSettingsVisibility(): void {
     this.isSearchSettingsVisible = !this.isSearchSettingsVisible
   }
 
   public changeSearchQuery(query: string): void {
-    this.searchService.changeQuery(query)
+    this.controller.changeSearchQuery(query)
+  }
+
+  public ngOnDestroy(): void {
+    this.controller.destroy()
   }
 }

@@ -1,5 +1,8 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   max-width: 1400px;
   margin: 0 auto;
   padding: 15px 30px;

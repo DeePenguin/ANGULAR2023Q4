@@ -1,6 +1,7 @@
 <div class="profile" *rxLet="userInfo$; let userInfo">
   <span class="profile-name mat-small">{{ userInfo?.name || defaultUserName }}</span>
   <ng-container *ngIf="userInfo; else notAuthorized">
+    <yt-button class="profile__button" [routerLink]="['/videos', 'favorites']" icon="favorite" appearance="fab" />
     <yt-button class="profile__button" [routerLink]="['/admin']" icon="account_circle" appearance="fab" />
     <yt-button (click)="logout()" class="profile__button" icon="logout" appearance="fab" />
   </ng-container>
