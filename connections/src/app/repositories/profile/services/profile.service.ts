@@ -5,9 +5,7 @@ import { convertProfileApiToProfile } from '../helpers/convert-profile-api-to-pr
 import type { Profile } from '../models/profile.model'
 import { ProfileHttpService } from './profile-http.service'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ProfileService {
   constructor(private profileHttpService: ProfileHttpService) {}
 

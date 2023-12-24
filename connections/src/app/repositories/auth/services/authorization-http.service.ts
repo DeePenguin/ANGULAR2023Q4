@@ -6,9 +6,7 @@ import type { SignInData } from '../models/sign-in-data.model'
 import type { SignInResponse } from '../models/sign-in-response.model'
 import type { SignUpData } from '../models/sign-up-data.model'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthorizationHttpService {
   constructor(private http: HttpClient) {}
 

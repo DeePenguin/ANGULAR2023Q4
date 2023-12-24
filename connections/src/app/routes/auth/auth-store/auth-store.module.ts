@@ -11,8 +11,10 @@ import { AUTH_STORE_KEYS } from './tokens/auth-store-keys.token'
 import { StoreFeatureNames } from 'src/app/common/models/store-feature-names.enum'
 import { storageMetaReducer } from 'src/app/common/tools/storage-meta-reducer'
 import { LocalStorageService } from 'src/app/core/storage/services/local-storage.service'
+import { AuthorizationHttpService } from 'src/app/repositories/auth/services/authorization-http.service'
+import { AuthorizationService } from 'src/app/repositories/auth/services/authorization.service'
 
-function getVideosConfig(
+function getAuthConfig(
   saveKeys: string[],
   localStorageKey: string,
   storageService: LocalStorageService,
@@ -27,6 +29,8 @@ function getVideosConfig(
     EffectsModule.forFeature(AuthEffects),
   ],
   providers: [
+    AuthorizationHttpService,
+    AuthorizationService,
     AuthFacade,
     LocalStorageService,
     { provide: AUTH_LOCAL_STORAGE_KEY, useValue: '__auth' },
@@ -37,7 +41,7 @@ function getVideosConfig(
     {
       provide: AUTH_STORE_CONFIG_TOKEN,
       deps: [AUTH_STORE_KEYS, AUTH_LOCAL_STORAGE_KEY, LocalStorageService],
-      useFactory: getVideosConfig,
+      useFactory: getAuthConfig,
     },
   ],
 })
