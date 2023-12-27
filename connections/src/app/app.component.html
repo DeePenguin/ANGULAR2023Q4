@@ -1,5 +1,5 @@
 <tui-theme-night *ngIf="isDark$ | async"></tui-theme-night>
-<tui-root class="tui-root" [tuiMode]="mode$ | async">
+<tui-root class="tui-root" [@slideIn]="prepareRout(outlet)" [tuiMode]="mode$ | async">
   <cn-header class="cn-header" />
-  <router-outlet />
+  <router-outlet #outlet="outlet" />
 </tui-root>
